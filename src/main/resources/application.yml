@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: spring-rest-api
+
+springdoc:
+  swagger-ui:
+    path: /swagger
+    operationsSorter: method
+    tagsSorter: alpha
+  api-docs:
+    path: /v3/api-docs
