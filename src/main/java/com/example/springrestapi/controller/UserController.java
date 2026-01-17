@@ -1,32 +1,58 @@
 package com.example.springrestapi.controller;
 
+import com.example.springrestapi.dto.UserRequest;
+import com.example.springrestapi.dto.UserResponse;
+import com.example.springrestapi.entity.User;
 import com.example.springrestapi.service.UserService;
-import org.apache.catalina.User;
+import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import io.swagger.v3.oas.annotations.tags.Tag;
+
+import java.util.List;
 
 @Tag(name="User")
 @RestController
-@RequestMapping("/api/user")
+@RequestMapping("/api/users")
 public class UserController {
 
-    private final UserService userService;
+    private final UserService service;
 
-    public UserController(UserService userService) {
-        this.userService = userService;
+    public UserController(UserService service) {
+        this.service = service;
     }
 
-    @GetMapping("/")
-    public ResponseEntity<?> getUsers() {
-        return ResponseEntity.ok().build();
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public UserResponse create(@Valid @RequestBody UserRequest request) {
+        return new UserResponse(service.create(request));
     }
 
     @GetMapping("/{id}")
-    public User getUser(@PathVariable Long id) {
-        return userService.findById(id);
+    public UserResponse get(@PathVariable Long id) {
+        return new UserResponse(service.getById(id));
+    }
+
+    @GetMapping
+    public List<UserResponse> list() {
+        return service.getAll()
+                .stream()
+                .map(UserResponse::new)
+                .toList();
+    }
+
+    @PutMapping("/{id}")
+    public UserResponse update(
+            @PathVariable Long id,
+            @Valid @RequestBody UserRequest request) {
+
+        return new UserResponse(service.update(id, request));
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable Long id) {
+        service.delete(id);
     }
 }
