@@ -6,5 +6,5 @@
 - ~~Create~~
 - ~~Remove~~
 - Pagination
-- Auditory (created_at, update_at)
+- ~~Auditory (created_at, update_at)~~
 - Spring Security + JWT
