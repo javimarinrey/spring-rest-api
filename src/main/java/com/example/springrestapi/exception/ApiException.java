@@ -1,7 +1,5 @@
 package com.example.springrestapi.exception;
 
-import org.springframework.http.HttpStatus;
-
 public class ApiException extends RuntimeException {
 
     private final ErrorCode errorCode;

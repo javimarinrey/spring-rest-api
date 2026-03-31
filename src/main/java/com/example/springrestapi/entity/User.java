@@ -22,6 +22,4 @@ public class User extends Auditable{
 
     @Column(nullable = false)
     private boolean active = true;
-
-    // getters y setters
 }

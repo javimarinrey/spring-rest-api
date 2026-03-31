@@ -2,11 +2,9 @@ package com.example.springrestapi.controller;
 
 import com.example.springrestapi.dto.UserRequest;
 import com.example.springrestapi.dto.UserResponse;
-import com.example.springrestapi.entity.User;
 import com.example.springrestapi.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
